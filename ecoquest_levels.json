@@ -1,0 +1,50 @@
+[
+ {"level_id":1,"theme":"Taman Kota Bersih",
+  "learning_objectives":["Membedakan sampah Organik, Anorganik, dan B3","Tahu bahwa plastik butuh ratusan tahun untuk terurai","Mengenali baterai bekas sebagai limbah B3"],
+  "gameplay":{"belt_speed":12,"spawn_gap":2.4,"total_items":12,"lives":3},
+  "items":[
+   {"id":"t1_01","name":"Botol plastik","emoji":"🍾","category":"Anorganik","fact":"Botol plastik butuh ±450 tahun untuk terurai."},
+   {"id":"t1_02","name":"Daun kering","emoji":"🍂","category":"Organik","fact":"Daun kering bisa diolah jadi kompos."},
+   {"id":"t1_03","name":"Kulit pisang","emoji":"🍌","category":"Organik","fact":"Kulit pisang cepat terurai jadi pupuk."},
+   {"id":"t1_04","name":"Kaleng minuman","emoji":"🥫","category":"Anorganik","fact":"Aluminium bisa didaur ulang berkali-kali."},
+   {"id":"t1_05","name":"Baterai bekas","emoji":"🔋","category":"B3","fact":"Baterai mengandung zat kimia berbahaya."},
+   {"id":"t1_06","name":"Kantong plastik","emoji":"🛍️","category":"Anorganik","fact":"Bawa tas belanja sendiri untuk mengurangi plastik."},
+   {"id":"t1_07","name":"Sisa nasi","emoji":"🍚","category":"Organik","fact":"Sisa makanan bisa jadi kompos atau pakan maggot."},
+   {"id":"t1_08","name":"Lampu neon bekas","emoji":"💡","category":"B3","fact":"Lampu neon mengandung merkuri, jangan dipecahkan."}],
+  "quiz":[
+   {"question":"Berapa lama botol plastik terurai di alam?","options":["±5 tahun","±50 tahun","±450 tahun","±1 minggu"],"answer_index":2,"explanation":"Plastik terurai sangat lambat, sekitar 450 tahun."},
+   {"question":"Mengapa baterai bekas masuk kategori B3?","options":["Karena terbuat dari logam","Karena mengandung zat kimia berbahaya","Karena berat","Karena berwarna"],"answer_index":1,"explanation":"Zat kimianya bisa mencemari tanah dan air."},
+   {"question":"Kulit pisang bisa diolah menjadi apa?","options":["Kompos","Plastik baru","Kaca","Baterai"],"answer_index":0,"explanation":"Sampah organik terurai menjadi kompos alami."}]},
+ {"level_id":2,"theme":"Sungai & Pantai Lestari",
+  "learning_objectives":["Memahami bahaya sampah plastik bagi satwa laut","Memilah bahan yang bisa didaur ulang atau dipakai ulang","Mengenali limbah cair B3 yang mencemari air"],
+  "gameplay":{"belt_speed":14,"spawn_gap":2.1,"total_items":14,"lives":3},
+  "items":[
+   {"id":"t2_01","name":"Sedotan plastik","emoji":"🥤","category":"Anorganik","fact":"Sedotan sering tertelan satwa laut."},
+   {"id":"t2_02","name":"Kulit kelapa","emoji":"🥥","category":"Organik","fact":"Sabut kelapa bisa jadi media tanam."},
+   {"id":"t2_03","name":"Botol kaca","emoji":"🍶","category":"Anorganik","fact":"Kaca bisa didaur ulang tanpa kehilangan mutu."},
+   {"id":"t2_04","name":"Oli bekas","emoji":"🛢️","category":"B3","fact":"Oli bekas mencemari air dan tanah."},
+   {"id":"t2_05","name":"Ranting kayu","emoji":"🪵","category":"Organik","fact":"Kayu dan ranting terurai alami."},
+   {"id":"t2_06","name":"Styrofoam","emoji":"📦","category":"Anorganik","fact":"Styrofoam sangat sulit terurai."},
+   {"id":"t2_07","name":"Kaleng cat","emoji":"🎨","category":"B3","fact":"Sisa cat mengandung bahan kimia beracun."},
+   {"id":"t2_08","name":"Jaring nilon","emoji":"🕸️","category":"Anorganik","fact":"Jaring bekas bisa menjerat ikan dan penyu."}],
+  "quiz":[
+   {"question":"Mengapa sampah plastik berbahaya bagi penyu?","options":["Dikira makanan lalu tertelan","Membuat air hangat","Menambah garam laut","Tidak berbahaya"],"answer_index":0,"explanation":"Penyu sering mengira plastik sebagai ubur-ubur."},
+   {"question":"Mengapa oli bekas tidak boleh dibuang ke selokan?","options":["Membuat selokan wangi","Mencemari air dan tanah","Cepat jadi kompos","Dimakan ikan"],"answer_index":1,"explanation":"Oli sulit terurai dan meracuni ekosistem air."},
+   {"question":"Apa cara terbaik menangani botol kaca?","options":["Buang ke sungai","Daur ulang atau pakai ulang","Bakar","Kubur di pantai"],"answer_index":1,"explanation":"Reuse dan recycle mengurangi sampah."}]},
+ {"level_id":3,"theme":"Dapur & Rumah Ramah Bumi",
+  "learning_objectives":["Menerapkan prinsip 3R: Reduce, Reuse, Recycle","Mengolah sisa dapur menjadi kompos","Menangani B3 rumah tangga dengan aman"],
+  "gameplay":{"belt_speed":16,"spawn_gap":1.8,"total_items":16,"lives":3},
+  "items":[
+   {"id":"t3_01","name":"Ampas kopi","emoji":"☕","category":"Organik","fact":"Ampas kopi bagus untuk pupuk tanaman."},
+   {"id":"t3_02","name":"Kardus bekas","emoji":"📦","category":"Anorganik","fact":"Kardus kering mudah didaur ulang."},
+   {"id":"t3_03","name":"Obat kedaluwarsa","emoji":"💊","category":"B3","fact":"Serahkan ke titik pengumpulan, jangan dibuang ke toilet."},
+   {"id":"t3_04","name":"Tulang ayam","emoji":"🍗","category":"Organik","fact":"Tulang terurai, tapi lebih lambat dari sayuran."},
+   {"id":"t3_05","name":"Toples kaca","emoji":"🫙","category":"Anorganik","fact":"Toples bisa dipakai ulang sebagai wadah."},
+   {"id":"t3_06","name":"Kaleng semprot","emoji":"🧴","category":"B3","fact":"Kaleng bertekanan bisa meledak jika dibakar."},
+   {"id":"t3_07","name":"Kulit telur","emoji":"🥚","category":"Organik","fact":"Kulit telur menyuburkan tanah."},
+   {"id":"t3_08","name":"Termometer raksa","emoji":"🌡️","category":"B3","fact":"Raksa sangat beracun, jangan disentuh."}],
+  "quiz":[
+   {"question":"Apa kepanjangan 3R?","options":["Reduce, Reuse, Recycle","Read, Rest, Repeat","Rinse, Rub, Rest","Remove, Rent, Return"],"answer_index":0,"explanation":"Kurangi, pakai ulang, dan daur ulang."},
+   {"question":"Sisa dapur organik cocok dijadikan apa?","options":["Kompos","Bensin","Baterai","Kaca"],"answer_index":0,"explanation":"Kompos mengembalikan nutrisi ke tanah."},
+   {"question":"Apa yang sebaiknya dilakukan pada obat kedaluwarsa?","options":["Dibuang ke toilet","Diserahkan ke titik pengumpulan limbah B3","Dibakar terbuka","Diberikan ke hewan"],"answer_index":1,"explanation":"B3 harus dikelola khusus agar tidak mencemari."}]}
+]
