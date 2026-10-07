@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>EcoQuest: Bank Sampah Rush</title>
+<style>
+:root{--sky:#9be7f2;--sky2:#e9fbff;--ink:#16323a;--sun:#ffd23f;--berry:#ff5c8a;--card:#fff;--leaf:#2fbf71;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#12414d;--sky2:#0c2a33;--ink:#eafaf3;--card:#173a45}}
+:root[data-theme="dark"]{--sky:#12414d;--sky2:#0c2a33;--ink:#eafaf3;--card:#173a45}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;color:var(--ink);background:var(--sky2) linear-gradient(var(--sky),var(--sky2))}
+#app{max-width:720px;margin:0 auto;padding:14px}
+h1,h2{margin:.2em 0}.tag{font-weight:700;margin:0}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:20px;padding:20px;box-shadow:0 6px 0 var(--ink)}
+button{font:inherit;cursor:pointer;color:#16323a}
+.go{background:var(--sun);border:3px solid #16323a;border-radius:14px;padding:12px 22px;font-weight:800;box-shadow:0 4px 0 #16323a}
+.go:active{transform:translateY(3px);box-shadow:0 1px 0 #16323a}
+.hud{display:flex;justify-content:space-between;gap:8px;font-weight:800;font-size:1.1rem;margin-bottom:6px}
+.eco{display:flex;align-items:center;gap:8px;font-size:1.5rem;margin-bottom:8px}
+.bar{flex:1;height:16px;border:3px solid var(--ink);border-radius:10px;background:var(--card);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--leaf);transition:width .3s}
+.belt{position:relative;height:120px;border:3px solid var(--ink);border-radius:16px;overflow:hidden;background:repeating-linear-gradient(90deg,#3c4a4e 0 28px,#2f3b3f 28px 56px)}
+.it{position:absolute;bottom:8px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;background:var(--card);border:3px solid var(--ink);border-radius:14px;padding:4px 8px;transition:transform .3s,opacity .3s}
+.it b{font-size:2rem;line-height:1}.it small{font-size:.7rem;font-weight:700;white-space:nowrap}
+.front{border-color:var(--sun);box-shadow:0 0 0 4px var(--sun)}
+.fly{transform:translate(-50%,90px) scale(.3);opacity:0}
+.toast{min-height:3.4em;margin:10px 0;padding:8px 12px;border-radius:12px;border:3px solid var(--ink);background:var(--card);font-weight:700}
+.toast.good{background:#c8f5d8;color:#16323a}.toast.bad{background:#ffd0dd;color:#16323a}
+.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bin{border:3px solid #16323a;border-radius:16px;padding:12px 4px;font-weight:800;box-shadow:0 4px 0 #16323a;display:flex;flex-direction:column;align-items:center}
+.bin span{font-size:1.8rem}.bin kbd{font-size:.75rem;opacity:.7}
+.Organik{background:#cdf0a6}.Anorganik{background:#bfe4ff}.B3{background:#ffc4d6}
+.bin:active{transform:translateY(3px);box-shadow:0 1px 0 #16323a}
+.pw{margin-top:12px;background:var(--card);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:8px 14px;font-weight:700}
+.pw:disabled{opacity:.5}
+.opts{display:grid;gap:10px;margin:12px 0}
+.opt{background:var(--card);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:12px;text-align:left;font-weight:700}
+.opt.right{background:#c8f5d8;color:#16323a}.opt.wrong{background:#ffd0dd;color:#16323a}
+.how,.ex{line-height:1.5}.stars{font-size:2.4rem}
+button:focus-visible{outline:4px solid var(--berry);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div id="app"></div>
+<script>
+const LV=[{"level_id": 1, "theme": "Taman Kota Bersih", "learning_objectives": ["Membedakan sampah Organik, Anorganik, dan B3", "Tahu bahwa plastik butuh ratusan tahun untuk terurai", "Mengenali baterai bekas sebagai limbah B3"], "gameplay": {"belt_speed": 12, "spawn_gap": 2.4, "total_items": 12, "lives": 3}, "items": [{"id": "t1_01", "name": "Botol plastik", "emoji": "🍾", "category": "Anorganik", "fact": "Botol plastik butuh ±450 tahun untuk terurai."}, {"id": "t1_02", "name": "Daun kering", "emoji": "🍂", "category": "Organik", "fact": "Daun kering bisa diolah jadi kompos."}, {"id": "t1_03", "name": "Kulit pisang", "emoji": "🍌", "category": "Organik", "fact": "Kulit pisang cepat terurai jadi pupuk."}, {"id": "t1_04", "name": "Kaleng minuman", "emoji": "🥫", "category": "Anorganik", "fact": "Aluminium bisa didaur ulang berkali-kali."}, {"id": "t1_05", "name": "Baterai bekas", "emoji": "🔋", "category": "B3", "fact": "Baterai mengandung zat kimia berbahaya."}, {"id": "t1_06", "name": "Kantong plastik", "emoji": "🛍️", "category": "Anorganik", "fact": "Bawa tas belanja sendiri untuk mengurangi plastik."}, {"id": "t1_07", "name": "Sisa nasi", "emoji": "🍚", "category": "Organik", "fact": "Sisa makanan bisa jadi kompos atau pakan maggot."}, {"id": "t1_08", "name": "Lampu neon bekas", "emoji": "💡", "category": "B3", "fact": "Lampu neon mengandung merkuri, jangan dipecahkan."}], "quiz": [{"question": "Berapa lama botol plastik terurai di alam?", "options": ["±5 tahun", "±50 tahun", "±450 tahun", "±1 minggu"], "answer_index": 2, "explanation": "Plastik terurai sangat lambat, sekitar 450 tahun."}, {"question": "Mengapa baterai bekas masuk kategori B3?", "options": ["Karena terbuat dari logam", "Karena mengandung zat kimia berbahaya", "Karena berat", "Karena berwarna"], "answer_index": 1, "explanation": "Zat kimianya bisa mencemari tanah dan air."}, {"question": "Kulit pisang bisa diolah menjadi apa?", "options": ["Kompos", "Plastik baru", "Kaca", "Baterai"], "answer_index": 0, "explanation": "Sampah organik terurai menjadi kompos alami."}]}, {"level_id": 2, "theme": "Sungai & Pantai Lestari", "learning_objectives": ["Memahami bahaya sampah plastik bagi satwa laut", "Memilah bahan yang bisa didaur ulang atau dipakai ulang", "Mengenali limbah cair B3 yang mencemari air"], "gameplay": {"belt_speed": 14, "spawn_gap": 2.1, "total_items": 14, "lives": 3}, "items": [{"id": "t2_01", "name": "Sedotan plastik", "emoji": "🥤", "category": "Anorganik", "fact": "Sedotan sering tertelan satwa laut."}, {"id": "t2_02", "name": "Kulit kelapa", "emoji": "🥥", "category": "Organik", "fact": "Sabut kelapa bisa jadi media tanam."}, {"id": "t2_03", "name": "Botol kaca", "emoji": "🍶", "category": "Anorganik", "fact": "Kaca bisa didaur ulang tanpa kehilangan mutu."}, {"id": "t2_04", "name": "Oli bekas", "emoji": "🛢️", "category": "B3", "fact": "Oli bekas mencemari air dan tanah."}, {"id": "t2_05", "name": "Ranting kayu", "emoji": "🪵", "category": "Organik", "fact": "Kayu dan ranting terurai alami."}, {"id": "t2_06", "name": "Styrofoam", "emoji": "📦", "category": "Anorganik", "fact": "Styrofoam sangat sulit terurai."}, {"id": "t2_07", "name": "Kaleng cat", "emoji": "🎨", "category": "B3", "fact": "Sisa cat mengandung bahan kimia beracun."}, {"id": "t2_08", "name": "Jaring nilon", "emoji": "🕸️", "category": "Anorganik", "fact": "Jaring bekas bisa menjerat ikan dan penyu."}], "quiz": [{"question": "Mengapa sampah plastik berbahaya bagi penyu?", "options": ["Dikira makanan lalu tertelan", "Membuat air hangat", "Menambah garam laut", "Tidak berbahaya"], "answer_index": 0, "explanation": "Penyu sering mengira plastik sebagai ubur-ubur."}, {"question": "Mengapa oli bekas tidak boleh dibuang ke selokan?", "options": ["Membuat selokan wangi", "Mencemari air dan tanah", "Cepat jadi kompos", "Dimakan ikan"], "answer_index": 1, "explanation": "Oli sulit terurai dan meracuni ekosistem air."}, {"question": "Apa cara terbaik menangani botol kaca?", "options": ["Buang ke sungai", "Daur ulang atau pakai ulang", "Bakar", "Kubur di pantai"], "answer_index": 1, "explanation": "Reuse dan recycle mengurangi sampah."}]}, {"level_id": 3, "theme": "Dapur & Rumah Ramah Bumi", "learning_objectives": ["Menerapkan prinsip 3R: Reduce, Reuse, Recycle", "Mengolah sisa dapur menjadi kompos", "Menangani B3 rumah tangga dengan aman"], "gameplay": {"belt_speed": 16, "spawn_gap": 1.8, "total_items": 16, "lives": 3}, "items": [{"id": "t3_01", "name": "Ampas kopi", "emoji": "☕", "category": "Organik", "fact": "Ampas kopi bagus untuk pupuk tanaman."}, {"id": "t3_02", "name": "Kardus bekas", "emoji": "📦", "category": "Anorganik", "fact": "Kardus kering mudah didaur ulang."}, {"id": "t3_03", "name": "Obat kedaluwarsa", "emoji": "💊", "category": "B3", "fact": "Serahkan ke titik pengumpulan, jangan dibuang ke toilet."}, {"id": "t3_04", "name": "Tulang ayam", "emoji": "🍗", "category": "Organik", "fact": "Tulang terurai, tapi lebih lambat dari sayuran."}, {"id": "t3_05", "name": "Toples kaca", "emoji": "🫙", "category": "Anorganik", "fact": "Toples bisa dipakai ulang sebagai wadah."}, {"id": "t3_06", "name": "Kaleng semprot", "emoji": "🧴", "category": "B3", "fact": "Kaleng bertekanan bisa meledak jika dibakar."}, {"id": "t3_07", "name": "Kulit telur", "emoji": "🥚", "category": "Organik", "fact": "Kulit telur menyuburkan tanah."}, {"id": "t3_08", "name": "Termometer raksa", "emoji": "🌡️", "category": "B3", "fact": "Raksa sangat beracun, jangan disentuh."}], "quiz": [{"question": "Apa kepanjangan 3R?", "options": ["Reduce, Reuse, Recycle", "Read, Rest, Repeat", "Rinse, Rub, Rest", "Remove, Rent, Return"], "answer_index": 0, "explanation": "Kurangi, pakai ulang, dan daur ulang."}, {"question": "Sisa dapur organik cocok dijadikan apa?", "options": ["Kompos", "Bensin", "Baterai", "Kaca"], "answer_index": 0, "explanation": "Kompos mengembalikan nutrisi ke tanah."}, {"question": "Apa yang sebaiknya dilakukan pada obat kedaluwarsa?", "options": ["Dibuang ke toilet", "Diserahkan ke titik pengumpulan limbah B3", "Dibakar terbuka", "Diberikan ke hewan"], "answer_index": 1, "explanation": "B3 harus dikelola khusus agar tidak mencemari."}]}];
+const $=s=>document.querySelector(s),app=$('#app'),CAT=['Organik','Anorganik','B3'],IC={Organik:'🍃',Anorganik:'♻️',B3:'☣️'},SC=['🏜️','🌱','🌿','🌳','🏞️'];
+let S={li:0,score:0,sc0:0,q:0,qok:0},G=null,raf=0,ac;
+function beep(f,d){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.04;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+(d||.1))}catch(e){}}
+function intro(){cancelAnimationFrame(raf);G=null;const l=LV[S.li];
+app.innerHTML=`<section class="card"><p class="tag">EcoQuest · Level ${l.level_id} dari ${LV.length}</p><h1>${l.theme}</h1><p>Misi belajar:</p><ul>${l.learning_objectives.map(o=>`<li>${o}</li>`).join('')}</ul><p class="how">Pilah barang di ban berjalan sebelum lewat. Ketuk tempat sampah atau tekan 1/2/3. Kombo beruntun melipatgandakan skor; tiap kombo 5 memberi Slow-mo (Spasi). Setelah itu ada kuis bonus.</p><button class="go" id="go">Mulai main</button></section>`;
+$('#go').onclick=start}
+function start(){const l=LV[S.li],p=l.gameplay;S.sc0=S.score;S.qok=0;S.q=0;let q=[];
+while(q.length<p.total_items)q=q.concat(l.items.slice().sort(()=>Math.random()-.5));q.length=p.total_items;
+G={l,p,q,n:0,live:[],lives:p.lives,combo:0,ok:0,slow:0,pow:0,t:.5,last:performance.now(),end:false};
+app.innerHTML=`<div class="hud"><span id="hs"></span><span id="hl"></span><span id="hc"></span></div><div class="eco"><span id="sc">🏜️</span><div class="bar"><i id="bar"></i></div><span>🌳</span></div><div class="belt" id="belt"></div><div id="toast" class="toast" role="status">Siap? Pilah barang yang paling kiri dulu!</div><div class="bins">${CAT.map((c,i)=>`<button class="bin ${c}" data-c="${c}"><span>${IC[c]}</span>${c}<kbd>${i+1}</kbd></button>`).join('')}</div><button id="pw" class="pw"></button>`;
+document.querySelectorAll('.bin').forEach(b=>b.onclick=()=>sort(b.dataset.c));$('#pw').onclick=slow;hud();raf=requestAnimationFrame(tick)}
+function tick(ts){if(!G||G.end)return;const dt=Math.min((ts-G.last)/1000,.05);G.last=ts;const f=G.slow>0?.45:1;if(G.slow>0)G.slow-=dt;
+const sp=(G.p.belt_speed+G.n*.5)*f;G.t-=dt*f;
+if(G.t<=0&&G.n<G.p.total_items){const it=G.q[G.n++],e=document.createElement('div');e.className='it';e.innerHTML=`<b>${it.emoji}</b><small>${it.name}</small>`;$('#belt').appendChild(e);G.live.push({it,e,x:100});G.t=G.p.spawn_gap}
+for(const o of G.live){o.x-=sp*dt;o.e.style.left=o.x+'%'}
+G.live.forEach((o,i)=>o.e.classList.toggle('front',i===0));
+if(G.live.length&&G.live[0].x<6){const o=G.live.shift();o.e.remove();lose('Terlewat! '+o.it.name+' seharusnya masuk '+o.it.category+'.')}
+hud();check();if(!G.end)raf=requestAnimationFrame(tick)}
+function toast(m,k){const t=$('#toast');if(t){t.textContent=m;t.className='toast '+(k||'')}}
+function lose(m){G.lives--;G.combo=0;toast(m,'bad');beep(140,.25)}
+function sort(c){if(!G||G.end||!G.live.length)return;const o=G.live.shift(),it=o.it;
+if(it.category===c){G.combo++;G.ok++;const m=Math.min(4,1+Math.floor(G.combo/3));S.score+=10*m;toast(`+${10*m}  ${it.fact}`,'good');beep(520+G.combo*40);if(G.combo%5===0){G.pow++;toast(`Kombo ${G.combo}! Slow-mo +1`,'good')}o.e.classList.add('fly');setTimeout(()=>o.e.remove(),350)}
+else{o.e.remove();lose(`Bukan ${c}: ${it.name} masuk ${it.category}. ${it.fact}`)}
+hud();check()}
+function slow(){if(G&&!G.end&&G.pow>0){G.pow--;G.slow=5;beep(300,.2);hud()}}
+function hud(){if(!G||!$('#hs'))return;$('#hs').textContent='Skor '+S.score;$('#hl').textContent='❤️'.repeat(Math.max(0,G.lives));$('#hc').textContent=G.combo>1?`Kombo ${G.combo} (x${Math.min(4,1+Math.floor(G.combo/3))})`:'';
+const p=G.ok/G.p.total_items;$('#bar').style.width=p*100+'%';$('#sc').textContent=SC[Math.min(4,Math.floor(p*4.99))];const b=$('#pw');b.textContent=`⏳ Slow-mo (${G.pow}) [Spasi]`;b.disabled=G.pow<1}
+function check(){if(G.end)return;if(G.lives<=0){G.end=true;over()}else if(G.n>=G.p.total_items&&!G.live.length){G.end=true;setTimeout(quiz,700)}}
+function over(){S.score=S.sc0;app.innerHTML=`<section class="card"><h2>Kota masih kotor 😢</h2><p>Nyawa habis. Ingat misi level ini:</p><ul>${G.l.learning_objectives.map(o=>`<li>${o}</li>`).join('')}</ul><button class="go" id="rt">Coba lagi</button></section>`;$('#rt').onclick=start}
+function quiz(){const l=LV[S.li],q=l.quiz[S.q];
+app.innerHTML=`<section class="card"><p class="tag">Kuis bonus ${S.q+1}/${l.quiz.length} (+50 poin)</p><h2>${q.question}</h2><div class="opts">${q.options.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div id="ex" class="ex" role="status"></div></section>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ok=i===q.answer_index;
+document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(+x.dataset.i===q.answer_index)x.classList.add('right')});
+if(ok){S.score+=50;S.qok++}else b.classList.add('wrong');beep(ok?660:160,.2);
+$('#ex').innerHTML=(ok?'Benar! ':'Belum tepat. ')+q.explanation+'<br><br><button class="go" id="nx">Lanjut</button>';
+$('#nx').onclick=()=>{S.q++;S.q<l.quiz.length?quiz():result()}})}
+function result(){const acc=G.ok/G.p.total_items,st=1+(acc>=.8?1:0)+(S.qok>=2?1:0),last=S.li===LV.length-1;
+app.innerHTML=`<section class="card"><h2>${last?'Bumi pulih! 🌍':'Level selesai!'}</h2><div class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><p>Akurasi pilah ${Math.round(acc*100)}% · Kuis ${S.qok}/${LV[S.li].quiz.length} · Total skor <b>${S.score}</b></p><button class="go" id="nx">${last?'Main dari awal':'Level berikutnya'}</button></section>`;
+$('#nx').onclick=()=>{if(last){S.li=0;S.score=0}else S.li++;intro()}}
+addEventListener('keydown',e=>{const i='123'.indexOf(e.key);if(i>=0)sort(CAT[i]);if(e.code==='Space'&&G&&!G.end){e.preventDefault();slow()}});
+intro();
+</script></body></html>
